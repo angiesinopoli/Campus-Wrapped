@@ -1,0 +1,84 @@
+# Campus Wrapped
+
+Team Green's Push2Prod project (Kappa Theta Pi, Fall 2026): a phone app that tracks the campus spots you visit and gives you weekly recaps plus a Spotify-style "Wrapped" at the end of the semester.
+
+This is the MVP demo. It is plain HTML, CSS and JavaScript with no build step. Places, people and reviews start from sample data in `js/data.js`. Your own check-ins, friend requests and reviews are saved in your browser (localStorage).
+
+## Run it
+
+You need a local web server, because the app uses JavaScript modules (opening `index.html` directly won't work).
+
+```bash
+cd campus-wrapped
+python3 -m http.server 8000
+```
+
+Then open http://localhost:8000. In VS Code, the "Live Server" extension works too.
+
+To start fresh, go to Profile and tap **Start over**.
+
+## What's in it
+
+1. **Onboarding:** pick any university (or type one that isn't listed), add your name, year and interests, and choose privacy settings.
+2. **Home:** hours on campus, a check-in button, this week's recap, your top spots and a suggested spot to try.
+3. **Wrapped:** the end-of-semester story so far and a weekly mini recap for each week.
+4. **Places:** every campus spot with filters. Each spot lets you check in, see friends and other people who go there, and read or write reviews.
+5. **Friends:** link Instagram or Snapchat (demo only), add people from your spots, see your friends.
+6. **Profile:** your info and settings, change university, start over.
+
+## Who owns what
+
+Each page is its own file in `pages/`, so everyone can work without stepping on each other.
+
+| Page | File | Owner |
+|---|---|---|
+| Home | `pages/home.js` | TBD |
+| Wrapped | `pages/wrapped.js` | TBD |
+| Places | `pages/places.js` | TBD |
+| Friends | `pages/friends.js` | TBD |
+| Profile + onboarding | `pages/profile.js`, `js/onboarding.js` | TBD |
+
+## Project layout
+
+```
+index.html          app shell and the onboarding screens
+css/styles.css      all styles (add page-only styles at the bottom under your page's heading)
+js/app.js           starts the app and draws the tab bar
+js/pages.js         the list of tabs (add new pages here)
+js/router.js        go("places", {place: 2}) switches tabs and passes params
+js/store.js         saved state: school, check-ins, friends, reviews
+js/data.js          sample schools, places, people and reviews
+js/ui.js            shared helpers: toast, story viewer, check-in sheet
+js/onboarding.js    the three sign-up steps
+pages/*.js          one file per tab
+pages/_template.js  copy this to make a new page
+```
+
+## Adding a feature to your page
+
+- Edit your page's `render(el, params)` function. It fills `el` with HTML and attaches click handlers.
+- Read and save data through `js/store.js` (for example `checkIn(i)`, `addFriend(name)`, or change `S` and call `save()`).
+- Use `esc()` from `js/ui.js` on anything a user typed before putting it into HTML.
+- To jump to another page, call `go("pageId", {any: "params"})`.
+
+## Adding a new page
+
+1. Copy `pages/_template.js` to `pages/yourpage.js` and change `id`, `label` and `icon`.
+2. Import it in `js/pages.js` and add it to `PAGES`.
+
+The tab bar fits about five tabs. If you add more, consider putting the new page behind a button on an existing page instead.
+
+## Working together on GitHub
+
+1. Each person makes a branch: `git checkout -b yourname/feature`.
+2. Commit and push your branch, then open a pull request.
+3. Someone else on the team reviews and merges it.
+
+To get a shareable demo link, turn on GitHub Pages (Settings > Pages > Deploy from branch > `main`, root folder). The app will be live at `https://<username>.github.io/<repo>/`.
+
+## Next steps after the demo
+
+- Backend in Python (Flask or FastAPI) with PostgreSQL for users, places, check-ins, friends and reviews.
+- Real location-based check-ins (the browser Geolocation API, or a native app later).
+- Real place lists per school, for example generated with Mockaroo at first.
+- AI-generated suggestions and recap text.

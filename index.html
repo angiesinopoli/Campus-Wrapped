@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Campus Wrapped</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Figtree:wght@400;500;600;700&family=JetBrains+Mono:wght@500&display=swap">
+<link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+<div class="stage">
+  <aside class="note">
+    <span class="tag">MVP demo · sample data</span>
+    <h1>Campus Wrapped</h1>
+    <p>Team Green's campus insights app. Pick your school, then explore your spots, weekly recaps, friends and reviews.</p>
+    <p>Visits, people and reviews start from sample data. Your own check-ins, friends and reviews are saved in this browser.</p>
+  </aside>
+
+  <div class="phone" id="phone">
+    <!-- Onboarding (logic in js/onboarding.js) -->
+    <section class="screen" id="ob1">
+      <div class="ob">
+        <div class="steps"><i class="on"></i><i></i><i></i></div>
+        <div class="ob-art"><canvas id="obCanvas"></canvas><div class="wm">Campus<br>Wrapped</div></div>
+        <div>
+          <div class="h-eyebrow">Step 1 of 3</div>
+          <h2 class="h1">Where do you go to school?</h2>
+          <p class="muted" style="margin:8px 0 0">We use this to load your campus spots and classmates.</p>
+        </div>
+        <div class="field">
+          <label for="uniInput" class="h-eyebrow" style="display:block;margin-bottom:6px">University</label>
+          <input id="uniInput" type="text" autocomplete="off" placeholder="Search any university">
+          <div class="suggest" id="suggest"></div>
+        </div>
+        <div class="spacer"></div>
+        <button class="btn" id="ob1Next" disabled>Continue</button>
+      </div>
+    </section>
+
+    <section class="screen" id="ob2" hidden>
+      <div class="ob">
+        <div class="steps"><i class="on"></i><i class="on"></i><i></i></div>
+        <div>
+          <div class="h-eyebrow">Step 2 of 3</div>
+          <h2 class="h1">Tell us a bit about you</h2>
+        </div>
+        <div class="field">
+          <label for="nameInput" class="h-eyebrow" style="display:block;margin-bottom:6px">First name</label>
+          <input id="nameInput" type="text" placeholder="Your first name">
+        </div>
+        <div>
+          <div class="h-eyebrow" style="margin-bottom:8px">Year</div>
+          <div class="row" style="flex-wrap:wrap;gap:8px" id="yearChips"></div>
+        </div>
+        <div>
+          <div class="h-eyebrow" style="margin-bottom:8px">What are you into? Pick a few</div>
+          <div class="row" style="flex-wrap:wrap;gap:8px" id="interestChips"></div>
+        </div>
+        <div class="spacer"></div>
+        <button class="btn" id="ob2Next">Continue</button>
+      </div>
+    </section>
+
+    <section class="screen" id="ob3" hidden>
+      <div class="ob">
+        <div class="steps"><i class="on"></i><i class="on"></i><i class="on"></i></div>
+        <div>
+          <div class="h-eyebrow">Step 3 of 3</div>
+          <h2 class="h1">Let your campus count</h2>
+          <p class="muted" style="margin:8px 0 0">Check-ins power your weekly recaps and your end-of-semester Wrapped. You control who sees what.</p>
+        </div>
+        <div class="stack" id="prefs"></div>
+        <div class="spacer"></div>
+        <button class="btn" id="ob3Next">See my campus</button>
+      </div>
+    </section>
+
+    <!-- App shell (logic in js/app.js, pages in pages/) -->
+    <div id="app" hidden style="display:contents">
+      <div class="topbar" id="topbar"></div>
+      <section class="screen" id="view"></section>
+      <nav class="tabbar" id="tabbar" aria-label="Main"></nav>
+    </div>
+    <div id="overlay"></div>
+    <div id="toastHost"></div>
+  </div>
+</div>
+<script type="module" src="js/app.js"></script>
+</body>
+</html>
